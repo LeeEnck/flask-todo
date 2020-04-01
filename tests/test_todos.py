@@ -10,6 +10,16 @@ def test_todo_list(client):
     assert response.data.count(b'<li class="">') == 2
     assert response.data.count(b'<li class="completed">') == 1
 
+
+def test_new_todo(client):
+    response = client.post(
+        '/',
+        data={'task': "tie shoes"}
+    )
+    assert response.data.count(b'<li class="">') == 3
+
+    
+
 def test_completed(client):
     response = client.get('/completed')
     assert b'clean room' not in response.data
