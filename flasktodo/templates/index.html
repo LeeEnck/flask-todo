@@ -10,6 +10,9 @@
     {% for todo in todos %}
       <li class="{{ "completed" if todo['completed'] }}">
         {{ todo['description'] }}
+        <form class="done" action="{{ url_for('todos.done', id=todo['id']) }}" method="post">
+          <button type="submit" name="done" value='Done'>Done</button>
+        </form>
       </li>
     {% endfor %}
   </ul>
