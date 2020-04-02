@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>A simple to-do application</h1>
+  <h1>To-do application</h1>
   <div class="filter">
-        <li><a href="{{ url_for('todos.completed') }}">Completed</a></li>
-        <li><a href="{{ url_for('todos.uncompleted') }}">Uncompleted</a></li>
-        <li><a href="/">All</a></li>
+    <li><a href="{{ url_for('todos.completed') }}">Completed</a></li>
+    <li><a href="{{ url_for('todos.uncompleted') }}">Uncompleted</a></li>
+    <li><a href="/">All</a></li>
+  </div>
+
   <ul>
     {% for todo in todos %}
       <li class="{{ "completed" if todo['completed'] }}">
         {{ todo['description'] }}
         <form class="done" action="{{ url_for('todos.done', id=todo['id']) }}" method="post">
           <button type="submit" name="done" value='Done'>Done</button>
+        </form>
+
+        <form class="delete" action="{{ url_for('todos.delete', id=todo['id']) }}" method="post">
+          <button type="submit" name="delete" value='Delete'>Delete</button>
         </form>
       </li>
     {% endfor %}
