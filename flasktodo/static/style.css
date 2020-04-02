@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  color: #222222;
+  background-color: white;
   display: flex;
   flex-direction: column;
   font-family: Helvetica, Arial, sans-serif;
@@ -20,13 +20,14 @@ body {
   padding: 2rem;
 }
 
+
 li.completed {
-  color: #666666;
+  color: #111;
   text-decoration: line-through;
 }
 
 div.filter {
   display: flex;
   list-style: none;
-  justify-content: space-around;
+  justify-content: space-between;
 }
