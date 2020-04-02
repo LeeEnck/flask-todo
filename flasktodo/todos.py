@@ -34,6 +34,7 @@ def index():
 
     return render_template("index.html", todos=todos)
 
+
 @bp.route("/completed", methods=['GET', 'POST'])
 def completed():
 
@@ -79,6 +80,7 @@ def done(id):
 
     return redirect(url_for('todos.index'))
 
+
 @bp.route("/<int:id>/delete", methods=('POST',))
 def delete(id):
     """Sets the individual task to delete"""
@@ -90,4 +92,5 @@ def delete(id):
     )
     g.db.commit()
     cur.close()
+
     return redirect(url_for('todos.index'))
