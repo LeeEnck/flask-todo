@@ -39,6 +39,18 @@ def test_uncompleted(client):
     assert response.data.count(b'<li class="completed">') == 0
 
 
+def test_marked(client):
+    client.post(
+        '/1/done',
+    )
+    response = client.get(
+        '/',
+    )
+    #This checks the number of completed tasks
+    assert response.data.count(b'<li class="">') == 1
+    assert response.data.count(b'<li class="completed">') == 2
+
+
 def test_delete(client):
     client.post(
         '/1/delete',
