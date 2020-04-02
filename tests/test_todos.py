@@ -1,4 +1,11 @@
 import pytest
+import pyscopg2
+
+
+from flasktodo.db import get_db
+from flasktodo import db
+from flask import g, session
+
 
 def test_todo_list(client):
     # View the home page and check to see the header and a to-do item
@@ -18,7 +25,6 @@ def test_new_todo(client):
     )
     assert response.data.count(b'<li class="">') == 3
 
-    
 
 def test_completed(client):
     response = client.get('/completed')
@@ -31,3 +37,14 @@ def test_uncompleted(client):
     assert b'clean room' not in response.data
 
     assert response.data.count(b'<li class="completed">') == 0
+
+
+def test_delete(client):
+    client.post(
+        '/1/delete',
+    )
+    response = client.get(
+        '/',
+    )
+
+    assert response.data.count(b'<li class="">') == 1
